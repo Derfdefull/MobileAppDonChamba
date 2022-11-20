@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MobileAppDonChamba.Models"  
+             xmlns:local="clr-namespace:MobileAppDonChamba.ViewModels" 
+             x:Class="MobileAppDonChamba.Views.AboutPage"
+             Title="Inicio"
+              
+            >
+    
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel></local:MainPageViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Image Source="logodonchamba.jpg" Aspect="AspectFit" HeightRequest="100" WidthRequest="200"></Image>
+
+                <Label Text="¡Bienvenido!" FontSize="Title" HorizontalOptions="Center" TextColor="Black"></Label>
+                <Label x:Name="txtUsername" FontSize="Subtitle" Padding="10,0,0,20"  HorizontalOptions="Center"></Label>
+
+                <Button Text="Nueva Orden" Clicked="Button_Clicked"></Button>
+            <Label x:Name="listTitle" Text="Historial de órdenes" FontSize="Medium" HorizontalOptions="Center"></Label>
+                <ListView x:Name="listOrderHistory"  ItemsSource="{Binding orderHistory}" 
+                      HasUnevenRows="True"
+                      SeparatorVisibility="Default" 
+                           IsPullToRefreshEnabled="True" 
+                           BackgroundColor="White" 
+                           SeparatorColor="White">
+                    <ListView.Header>
+                    <StackLayout HorizontalOptions="Center">
+                        <Label x:Name="listSubTitle" Text="No has enviado ninguna orden..." HorizontalOptions="Center" FontSize="Subtitle"></Label>
+                        </StackLayout>
+                    </ListView.Header>
+                
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                            <Grid>
+                                <Frame Padding="10" CornerRadius="5" HasShadow="True" >
+                                    <FlexLayout>
+                                        <Image x:Name="orderStatus" Source="{Binding Estado, StringFormat='status_{0}.png'}" WidthRequest="32"></Image>
+                                        <StackLayout Padding="10, 0" Orientation="Vertical">
+                                            <Label FontSize="Default" Text="{Binding  PkIdOrden, StringFormat='Orden #{0}'}"> </Label>
+                                            <Label TextColor="Black" Text="{Binding Total, StringFormat='Monto total: {0:C2}'}"></Label>
+                                                <Label FontSize="Default" Text="{Binding Comentario}"> </Label>
+                                        </StackLayout>
+                                    </FlexLayout> 
+                                    </Frame>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+       
+    </ContentPage.Content>
+
+</ContentPage>

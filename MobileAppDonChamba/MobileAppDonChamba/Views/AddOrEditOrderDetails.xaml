@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileAppDonChamba.ViewModels"
+             x:Class="MobileAppDonChamba.Views.AddOrEditOrderDetails">
+
+    <ContentPage.BindingContext>
+        <local:AddOrEditOrderDetailsModel></local:AddOrEditOrderDetailsModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <ActivityIndicator x:Name="Loading" HeightRequest="50" IsRunning="True" WidthRequest="50" IsEnabled="True" IsVisible="False"/>
+ 
+ 
+            <Label Text="Productos" FontSize="Medium" /> 
+            <ListView x:Name="listproducts" ItemsSource="{Binding productList}"  IsVisible="false"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="Default" 
+                           IsPullToRefreshEnabled="True" 
+                           BackgroundColor="White" 
+                           SeparatorColor="White"
+                           SelectedItem="{Binding SelectedProduct}">
+                <ListView.Header>
+                    <StackLayout HorizontalOptions="Center">
+                        <Label x:Name="listSubTitle" Text="Selecciona uno..." HorizontalOptions="Center" Padding="5" FontSize="Small"></Label>
+                    </StackLayout>
+                </ListView.Header> 
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Frame Padding="5" CornerRadius="25" HasShadow="True" >
+                                    <FlexLayout>
+                                        <Image x:Name="orderStatus" Source="{Binding Imagen}" WidthRequest="125"></Image>
+                                        <StackLayout Padding="10, 0" Orientation="Vertical">
+                                            <Label FontSize="Subtitle" Text="{Binding Nombre}"></Label> 
+                                            <Label FontSize="Caption" Text="{Binding Descripcion}"></Label>  
+                                               <Picker Title="seleccione cantidad" SelectedIndexChanged="Picker_SelectedIndexChanged"   >
+                                                <Picker.Items>
+                                                    <x:String>1</x:String>
+                                                    <x:String>2</x:String>
+                                                    <x:String>3</x:String>
+                                                    <x:String>4</x:String>
+                                                    <x:String>5</x:String>
+                                                    <x:String>6</x:String>
+                                                    <x:String>7</x:String>
+                                                    <x:String>8</x:String>
+                                                    <x:String>9</x:String>
+                                                    <x:String>10</x:String>
+                                                </Picker.Items>
+                                                </Picker>  
+                                        </StackLayout>
+                                    </FlexLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView> 
+             
+            <Label Padding="10"></Label> 
+           
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancelar"  Clicked="Button_Cancel" HorizontalOptions="FillAndExpand"></Button>
+               
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

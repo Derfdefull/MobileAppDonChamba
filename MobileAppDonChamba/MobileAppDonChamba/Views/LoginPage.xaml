@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileAppDonChamba.Views.LoginPage"
+             Shell.NavBarIsVisible="False" BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout Padding="10,0,10,0" Margin="25" VerticalOptions="Start">
+            <Image Source="logodonchamba.jpg" Aspect="AspectFit" HeightRequest="200" WidthRequest="200"></Image>
+           
+            <Label Text="¡Bienvenido!" FontSize="Title" HorizontalOptions="Center" TextColor="Black"></Label>
+            <Label Text="Identifiquese para poder acceder a la aplicación" FontSize="Small" Padding="10,0,0,20"  HorizontalOptions="Center"></Label>
+            <ActivityIndicator x:Name="Loading" HeightRequest="50" IsRunning="True" WidthRequest="50" IsEnabled="True" IsVisible="False"/>
+            
+            <Label Text="Usuario:" FontSize="Subtitle" TextColor="Black" Padding="10">  </Label>
+            <Entry Placeholder="Nombre de Usuario"  x:Name="txtUsername" MaxLength="18" HorizontalTextAlignment="Center" />
+
+            <Label Text="Contraseña:" FontSize="Subtitle" TextColor="Black"  Padding="10"></Label>
+            <Entry Placeholder="****************" x:Name="txtPassword" IsPassword="True" HorizontalTextAlignment="Center" />
+            <Label Padding="10"></Label>
+            <Button VerticalOptions="Center" Text="Iniciar Sesión" x:Name="btnLogIn" Clicked="btnLogIn_Clicked"/>
+            
+        </StackLayout> 
+    </ContentPage.Content>
+
+    
+</ContentPage >

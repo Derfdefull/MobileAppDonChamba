@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileAppDonChamba.Views.ItemsPage"
+             Title="Nueva orden"
+             xmlns:local="clr-namespace:MobileAppDonChamba.ViewModels" xmlns:d="http://xamarin.com/schemas/2014/forms/design" >
+
+    <ContentPage.BindingContext>
+        <local:OrderDetailsModel></local:OrderDetailsModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar +" Clicked="ToolbarItem_Clicked"></ToolbarItem> 
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content >
+        <StackLayout Spacing="3" Padding="15">
+            <ActivityIndicator x:Name="Loading" HeightRequest="50" IsRunning="True" WidthRequest="50" IsEnabled="True" IsVisible="False"/>
+            <ListView ItemsSource="{Binding OrderDetail}" x:Name="lvOrderDetails"  HasUnevenRows="True"
+                      SeparatorVisibility="Default" 
+                           IsPullToRefreshEnabled="True" 
+                           BackgroundColor="White" 
+                           SeparatorColor="White" RowHeight="125"  IsVisible="false"
+                          >
+                <ListView.Header>
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label x:Name="listTitle" Text="Detalle de Orden" FontSize="Subtitle" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Label>
+                    </StackLayout>
+                </ListView.Header> 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>  
+                            <Grid Padding="5"  >
+                                <Frame Padding="5" CornerRadius="5" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" > 
+                                        <Image Source="{Binding Product.Imagen}" WidthRequest="75" HeightRequest="75"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFit"></Image>
+                                        <StackLayout>
+                                            <Label Text="{Binding Product.Nombre }"></Label>
+                                            <Label Text="{Binding Product.Descripcion }"></Label>
+                                            <Label Text="{Binding OrderDetail.Cantidad, StringFormat='Solicita: {0} Cajas'}"></Label>
+                                            <Label Text="{Binding OrderDetail.Subtotal, StringFormat='Sub Total: {0:C2}'}"></Label>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical">
+                                            <Image Source="remove.png" VerticalOptions="Start" HorizontalOptions="EndAndExpand" WidthRequest="18">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                    Tapped="TapGestureRecognizer_Tapped" 
+                                                    CommandParameter="{Binding Product.PkIdProducto}">
+                                                    </TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image Source="editar.png" VerticalOptions="EndAndExpand"  WidthRequest="25">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                    Tapped="TapGestureRecognizer_Tapped_1" 
+                                                    CommandParameter="{Binding OrderDetail}">
+                                                    </TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout> 
+                                    </StackLayout>
+                                </Frame> 
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout Padding="10" VerticalOptions="Center" Orientation="Horizontal">
+                        <Button x:Name="btnCancel" Clicked="btnCancel_Clicked" Text="Cancelar" ></Button>
+                        <Button x:Name="btnSend" Text="Procesar" Clicked="btnSend_Clicked" IsEnabled="False"></Button>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
